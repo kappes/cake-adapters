@@ -1,0 +1,13 @@
+{
+  "name": "cake-adapters",
+  "private": true,
+  "description": "Site adapters that let Cake import models from links to model pages.",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node test/run.mjs",
+    "record": "node test/run.mjs --record",
+    "build": "node scripts/build.mjs",
+    "keygen": "node scripts/keygen.mjs"
+  }
+}

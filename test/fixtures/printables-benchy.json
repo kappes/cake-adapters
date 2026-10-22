@@ -1,0 +1,29 @@
+{
+  "adapter": "printables",
+  "url": "https://www.printables.com/model/3161-3d-benchy",
+  "expect": {
+    "title": "3D BENCHY",
+    "designer": "Prusa Research",
+    "license": "Creative Commons — Public Domain",
+    "files": [
+      "3dbenchy.stl"
+    ],
+    "browse": false
+  },
+  "responses": [
+    {
+      "method": "POST",
+      "url": "https://api.printables.com/graphql/",
+      "body": "{\"query\":\"query Model($id: ID!) { print(id: $id) { name user { publicUsername } license { name } stls { id name } } }\",\"variables\":{\"id\":\"3161\"}}",
+      "status": 200,
+      "text": "{\"data\":{\"print\":{\"name\":\"3D BENCHY\",\"user\":{\"publicUsername\":\"Prusa Research\"},\"license\":{\"name\":\"Creative Commons \\u2014 Public Domain\"},\"stls\":[{\"id\":\"49068\",\"name\":\"3dbenchy.stl\"}]}}}"
+    },
+    {
+      "method": "POST",
+      "url": "https://api.printables.com/graphql/",
+      "body": "{\"query\":\"mutation Link($id: ID!, $printId: ID!) { getDownloadLink(id: $id, printId: $printId, fileType: stl, source: model_detail) { ok output { link } } }\",\"variables\":{\"id\":\"49068\",\"printId\":\"3161\"}}",
+      "status": 200,
+      "text": "{\"data\":{\"getDownloadLink\":{\"ok\":true,\"output\":{\"link\":\"https://files.printables.com/media/prints/3161/stls/123914_1f1d8ca1-252a-4770-846f-52f1208d193d/3dbenchy.stl\"}}}}"
+    }
+  ]
+}

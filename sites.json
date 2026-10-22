@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "adapters": [
+    {
+      "id": "printables",
+      "hosts": ["printables.com"],
+      "fetchHosts": ["api.printables.com"],
+      "file": "printables.js"
+    },
+    {
+      "id": "makerworld",
+      "hosts": ["makerworld.com"],
+      "file": "makerworld.js"
+    }
+  ]
+}
