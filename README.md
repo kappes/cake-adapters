@@ -4,8 +4,12 @@ Small JavaScript modules that tell Cake how to get the model files behind a link
 page. Cake downloads a newer signed package from this repository's releases, so adapters can
 be fixed without an app update; the package bundled with the app is the fallback.
 
-This folder is meant to become its own repository (`cake-adapters`); until then it lives in the
-Cake repository.
+Cake itself lives in [kappes/slicer](https://github.com/kappes/slicer); this repository started
+as its `adapters/` folder.
+
+> The repository is private for now. Cake downloads updates anonymously from
+> `releases/latest/download/adapters.zip`, which GitHub serves only for public repositories,
+> so until it is public the app uses the adapters bundled with it.
 
 ## How Cake uses them
 
@@ -35,7 +39,7 @@ the site wants that) and Cake takes the file. Sites without an adapter always wo
 
 ## Working on adapters
 
-Needs Node 22 (`../libslic3r/fetch-tools.sh node` puts one into `../tools/`).
+Needs Node 22 (in the Cake repository, `libslic3r/fetch-tools.sh node` puts one into `tools/`).
 
 ```bash
 npm test             # every adapter against the recorded responses in test/fixtures
@@ -47,16 +51,17 @@ A new adapter: add the script to `src/`, list it in `sites.json`, add a fixture 
 `test/fixtures` with `adapter`, `url` and the `expect`ed result, then `npm run record`.
 Raise `version` in `sites.json` for every release; Cake only takes a newer version.
 
-To update the copy bundled with the app:
+To update the copy bundled with the app (Cake checked out next to this repository):
 
 ```bash
-node scripts/build.mjs --copy-to ../Cake/Resources/Adapters
+node scripts/build.mjs --copy-to ../slicer/Cake/Resources/Adapters
 ```
 
 ## Releases and signing
 
 `manifest.json` lists the SHA-256 of every script and `manifest.sig` is its Ed25519 signature,
-so Cake accepts only packages signed with the release key. `npm run keygen` creates a key pair:
-the private key goes into the `CAKE_ADAPTERS_KEY` secret, the public key into
-`AdapterPackage.publicKey` in Cake. Pushing a tag like `v2` runs the tests, builds, signs and
+so Cake accepts only packages signed with the release key. The private key is the
+`CAKE_ADAPTERS_KEY` secret of this repository (a copy is kept outside any repository); its
+public key is `AdapterPackage.publicKey` in Cake. `npm run keygen` creates a new pair, should
+the key ever need replacing – Cake then needs an update with the new public key. Pushing a tag like `v2` runs the tests, builds, signs and
 publishes `adapters.zip` as a release (`.github/workflows/release.yml`).
