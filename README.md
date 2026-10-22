@@ -7,10 +7,6 @@ be fixed without an app update; the package bundled with the app is the fallback
 Cake itself lives in [kappes/slicer](https://github.com/kappes/slicer); this repository started
 as its `adapters/` folder.
 
-> The repository is private for now. Cake downloads updates anonymously from
-> `releases/latest/download/adapters.zip`, which GitHub serves only for public repositories,
-> so until it is public the app uses the adapters bundled with it.
-
 ## How Cake uses them
 
 When a link is shared to Cake, the adapter for the page's host runs in JavaScriptCore. It
